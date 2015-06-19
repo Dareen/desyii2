@@ -1,5 +1,5 @@
 front:
-  build: images/nginx
+  build: images/front
   ports:
     - "80:80"
     - "9000:9000"
@@ -8,7 +8,7 @@ front:
     - elasticsearch:elasticsearch
   volumes:
     - www:/var/www
-    - sites:/etc/nginx/sites-enabled
+    - sites:/etc/apache2/sites-enabled
 
 mysql:
   image: tutum/mysql
