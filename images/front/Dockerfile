@@ -9,9 +9,8 @@ RUN apt-get install -y \
 # Config
 COPY apache_default /etc/apache2/sites-available/000-default.conf
 
-# Migrate DB
+# Copy the project dir to run migrations later
 ADD www/ /var/www
-# RUN php /var/www/default/yii migrate
 
 # Expose volumes
 VOLUME ["/var/www", "/etc/apache2/sites-enabled"]
