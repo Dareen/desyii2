@@ -1,5 +1,7 @@
 FROM tutum/apache-php:latest
 
+ENV     GITHUB_TOKEN        your_generated_github_token
+
 # Install packages
 RUN apt-get update
 RUN apt-get install -y \
@@ -16,6 +18,10 @@ COPY apache_default /etc/apache2/sites-available/000-default.conf
 # Copy the project dir to run migrations later
 ADD www/ /var/www
 
+# Expose volumes - before composer update so the generated
+# autoload.php doesn't get overriden, needed later for yii migrate
+VOLUME ["/var/www", "/etc/apache2/sites-enabled"]
+
 RUN \
     # Enable apache rewrite module
     a2enmod rewrite && \
@@ -23,11 +29,11 @@ RUN \
     curl -sS https://getcomposer.org/installer | php && \
     mv composer.phar /usr/local/bin/composer && \
     # yii2 requires composer-asset-plugin
-    composer global require "fxp/composer-asset-plugin:~1.0.0" && \
-    # required dependencies
-    su - root -l -c "cd /var/www/default" && composer update
+    composer config --global github-oauth.github.com $GITHUB_TOKEN && \
+    composer global require "fxp/composer-asset-plugin:~1.0.0"
 
-# Expose volumes
-VOLUME ["/var/www", "/etc/apache2/sites-enabled"]
+# required dependencies
+WORKDIR /var/www/default
+RUN composer update
 
 EXPOSE 80 9000

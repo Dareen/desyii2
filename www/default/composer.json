@@ -33,11 +33,5 @@
             "npm-asset-library": "vendor/npm",
             "bower-asset-library": "vendor/bower"
         }
-    },
-    "repositories": [
-        {
-            "url": "https://__GITHUB_TOKEN__:x-oauth-basic@api.github.com/repos/jquery/jquery/contents/bower.json?ref=b50c9a8d92f94f310138f4528e3a36b5336539a1",
-            "type": "git"
-        }
-    ]
+    }
 }

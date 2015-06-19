@@ -41,3 +41,4 @@ Resources:
 * [Basic Yii2 Rest API](http://budiirawan.com/setup-restful-api-yii2/)
 https://devops.profitbricks.com/tutorials/configure-a-docker-container-to-automatically-pull-from-github-using-oauth/
 http://www.yiiframework.com/doc-2.0/guide-start-installation.html#recommended-apache-configuration
+https://github.com/composer/composer/blob/master/doc/articles/troubleshooting.md#api-rate-limit-and-oauth-tokens
