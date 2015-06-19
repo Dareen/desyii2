@@ -16,6 +16,7 @@ mysql:
     - "3306:3306"
   environment:
     MYSQL_PASS: password
+    ON_CREATE_DB: yii2db
 
 elasticsearch:
   image: tutum/elasticsearch
