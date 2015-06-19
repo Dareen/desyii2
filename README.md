@@ -8,11 +8,8 @@ PHPStack gives you everything you need for developing PHP applications locally. 
 * [Shipyard](http://shipyard-project.com/)
 * [Nginx](http://nginx.org/)
 * [MySQL](http://www.mysql.com/)
-* [MongoDB](http://www.mongodb.org/)
 * [PHP-FPM](http://php-fpm.org/)
 * [HHVM](http://www.hhvm.com/)
-* [Memcached](http://memcached.org/)
-* [Redis](http://redis.io/)
 * [Elasticsearch](http://www.elasticsearch.org/)
 
 ## Getting started
