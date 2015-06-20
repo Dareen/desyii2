@@ -1,7 +1,5 @@
 # Dockerized PHP Yii2 api using ElasticSearch, MySql, OAuth2
 
-# Work In Progress
-
 ## Docker containers include:
 
 * [Apache](https://github.com/tutumcloud/apache-php)
@@ -119,7 +117,9 @@ admin:password<br/>
 * https://github.com/bshaffer/oauth2-server-php
 * https://github.com/Filsh/yii2-oauth2-server
 
-Progress tracking:
+## Work In Progress
+
+Improvements:
 - [x] Use elasticsearch active record
 - [x] Users endpoints to list and create
 - [x] authorize requests
