@@ -41,34 +41,36 @@ $ cd desyii2
 $ make run
 ```
 
+This will build the docker containers if they don't exist, then will run the docker images and link them, and finally post docker run procedures, like running DB migrations, and creating ElasticSearch index mappings.
 
-* Stopping the docker containers, deleting the images... etc.
+
+* Stopping the docker containers and deleting the images (just for reference)
 run:
 `make stop`
 this will stop docker-compose and the running containers.
-To delete an image, run `docker images | grep "front\|mysql\|elasticsearch"`
-Copy the image ids and run `docker rmi img_id` on them
+To delete an image, run `docker images | grep "\<image name\>"`
+Copy the image id, and run `docker rmi \<image id\>`
 
 ### Usage
 
 * Now you can send requests to `localhost:8888`
-**Anonymous endpoints:**
+* **Anonymous endpoints:**
 GET /posts
-GET /posts/id
-POST /search
+GET /posts/\<id\>
+GET /search
 
-**User endpoints:**
+* **User endpoints:**
 
-POST /posts
-PUT /posts
-DELETE /posts
-GET /users
-GET /id
-POST /users
-PUT /users
-DELETE /users
+POST /posts<br/>
+PUT /posts<br/>
+DELETE /posts<br/>
+GET /users<br/>
+GET users/\<id\><br/>
+POST /users<br/>
+PUT /users<br/>
+DELETE /users<br/>
 
-* To authenticate a request, you must first get a token by sending a request to OAuth2 server:
+* To authenticate a request, you must first get a token by sending a request to OAuth2 server:<br/>
 POST /outh2/token
 
 payload json:
@@ -83,19 +85,29 @@ payload json:
 ```
 
 * Users that are already available:
-demo:password
-test:password
+demo:password<br/>
+test:password<br/>
 
 * OAuth2 Client Id and Secret:
-testclient:testpass
+testclient:testpass<br/>
 
 * Databases credentials
-admin:password
+admin:password<br/>
+
+* Search terms:
+`status`: int: 1 => active, 0 -> inactive<br/>
+`user_id`: the id of the lister/creator of the post<br/>
+`title`: keywords to search by<br/>
+`price_gte`: lower limit of a price range of the posted item<br/>
+`price_lte`: upper limit of the price range<br/>
+`age_gte`: age older limit, along with age_lte useful to search for posts listed in a gived period of time (by minutes, just for testing and demoing)<br/>
+`age_lte`: max age of posts
 
 
 ### Resources:
 
 * [Initial docker containers](https://github.com/kasperisager/phpstack)
+* [Apache2 docker container](https://registry.hub.docker.com/u/tutum/apache-php/)
 * [Yii2 Rest Guide](http://www.yiiframework.com/doc-2.0/guide-rest-quick-start.html)
 * [GitHub Rate Limit](https://github.com/composer/composer/blob/master/doc/articles/troubleshooting.md#api-rate-limit-and-oauth-tokens)
 * [Docker with GitHub token](https://devops.profitbricks.com/tutorials/configure-a-docker-container-to-automatically-pull-from-github-using-oauth/)
@@ -116,13 +128,12 @@ Progress tracking:
 - [x] CRUD for Posts
 - [ ] Tests
 - [ ] Lookup php linters for sublime and check coding style standards
-- [-] Documentation (this doc)
+- [x] Documentation (this doc)
 - [ ] API versioning
-- [ ] pagination?
-- [ ] role based access control
+- [ ] RBAC: role based access control
 - [ ] cleanup the project structrure and unneeded files
 - [ ] proper exception handling
-- [ ] rename the repo to something more meaningful
+- [ ] rename the repo to a more meaningful name
 - [ ] find similar posts if the requested search yeilded no results
 - [x] code comments
 - [ ] format api responses

@@ -7,9 +7,10 @@ use yii\filters\AccessControl;
 
 use yii\elasticsearch\ActiveQuery;
 
-// use yii\web\ForbiddenHttpException;
+use yii\web\NotFoundHttpException;
+use yii\web\BadRequestHttpException;
 
-// use yii\data\ActiveDataProvider;
+use yii\data\ActiveDataProvider;
 use app\models\Post;
 
 
@@ -58,26 +59,84 @@ class PostController extends OAuth2RestController
         if (!empty($_GET))
         {
             $model = new $this->modelClass;
-            // check that all the search GET params are valid attributes of the model
-            foreach ($_GET as $key => $value)
-            {
-                if (!$model->hasAttribute($key))
-                {
-                    throw new NotFoundHttpException('Invalid attribute:' . $key);
-                }
+            $query = $model->find();
+            $mustTerms = array();
+
+            // user
+            if (array_key_exists('user_id', $_GET)) {
+                $mustTerms[] = ["term" => [ "user_id" => $_GET['user_id']]];
+            }
+            if (array_key_exists('status', $_GET)) {
+                $mustTerms[] = ["term" => [ "status" => $_GET['status']]];
+            }
+
+            // bool must
+            if (!empty($mustTerms)) {
+                $query->filter(
+                    ["bool" => ["must" => [$mustTerms]]]
+                );
+            }
+
+            // title
+            if (array_key_exists('title', $_GET)) {
+                $query->query(
+                    [
+                        "match" => [
+                            "title" => $_GET['title']
+                        ]
+                    ]
+                );
+            }
+
+            // price
+            $priceRange = array();
+            if (array_key_exists('price_lte', $_GET)) {
+                $priceRange[] = ["lte" => $_GET['price_lte']];
+            }
+            if (array_key_exists('price_gte', $_GET)) {
+                $priceRange[] = ["gte" => $_GET['price_gte']];
+            }
+            if (!empty($priceRange)) {
+                $query->filter(
+                    [
+                        "range" => [
+                            "price" => $priceRange
+                        ]
+                    ]
+                );
+            }
+
+            // age rane of listing in minutes (for testing and demoing purposes)
+            $ageRange = array();
+            if (array_key_exists('age_lte', $_GET)) {
+                $upperStamp = time() - $_GET['age_lte']*60;
+                $upperDate = date(DATE_ATOM, $upperStamp);
+
+                $ageRange[] = ["lte" => $upperDate];
+            }
+            if (array_key_exists('age_gte', $_GET)) {
+                $lowerStamp = time() - $_GET['age_gte']*60;
+                $lowerDate = date(DATE_ATOM, $lowerStamp);
+
+                $ageRange[] = ["gte" => $lowerDate];
+            }
+            if (!empty($ageRange)) {
+                $query->filter(
+                    [
+                        "range" => [
+                            "created_at" => $ageRange
+                        ]
+                    ]
+                );
             }
 
             $provider = new ActiveDataProvider([
-                // TODO: elasicize this
-                'query' => $model->find()->where($_GET),
-                // TODO: pagination
-                'pagination' => false
+                'query' => $query,
             ]);
-
             if ($provider->getCount() <= 0)
             {
                 throw new NotFoundHttpException('No posts are found with ' .
-                    'the provided parameters, please update and search again.');
+                    'the provided parameters, please update the search and try again.');
             }
             else
             {
@@ -86,7 +145,9 @@ class PostController extends OAuth2RestController
         }
         else
         {
-            throw new BadRequestHttpException('Please provide search terms.');
+            throw new BadRequestHttpException('Please provide at least one '.
+                'search terms: status, user_id, title, price_gte, price_lte, '.
+                'age_gte, age_lte');
         }
     }
 }

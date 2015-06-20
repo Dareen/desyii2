@@ -97,7 +97,6 @@ class User extends ActiveRecord implements IdentityInterface, UserCredentialsInt
         return !empty($token['user_id'])
                     ? static::findIdentity($token['user_id'])
                     : null;
-        // throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
     }
 
     /**

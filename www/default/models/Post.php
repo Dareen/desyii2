@@ -104,11 +104,7 @@ class Post extends ActiveRecord implements Linkable
                     ActiveRecord::EVENT_BEFORE_INSERT => 'email',
                 ],
                 'value' => function ($event) {
-                    return 'fake email';
-                    // TODO:
-                    // var_dump($this->getUser());
-                    // exit;
-                    // return $this->getUser()->email;
+                    return $this->getUser()->email;
                 },
             ],
             [
@@ -117,9 +113,8 @@ class Post extends ActiveRecord implements Linkable
                     ActiveRecord::EVENT_BEFORE_INSERT => 'mobile',
                 ],
                 'value' => function ($event) {
-                    return 'fake mobile';
-                    // TODO:
-                    // return $this->getUser()->username;
+                    if ($this->getUser()->hasAttribute('mobile'))
+                        return $this->getUser()->mobile;
                 },
             ],
             [
@@ -131,6 +126,13 @@ class Post extends ActiveRecord implements Linkable
                     return md5(time()+rand(0, 10000));
                 },
             ],
+            [
+                'class' => AttributeBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'status',
+                ],
+                'value' => 1,
+            ],
         ]);
 
         return $behaviors;
@@ -141,41 +143,8 @@ class Post extends ActiveRecord implements Linkable
         return [
 
             # TODO: fix this to be restful /posts/<id>
-
             Link::REL_SELF => Url::to(['index', 'id' => $this->id], true),
         ];
-    }
-
-
-    /**
-     * Defines a scope that modifies the `$query` to return only active(status = 1) posts
-     */
-    public static function active($query)
-    {
-        $query->andWhere(['status' => 1]);
-    }
-
-    /**
-     * Finds post by userId
-     *
-     * @param  int      $userId
-     * @return ??
-     */
-    public static function findByUserId($userId)
-    {
-        $result = Post::find()->where(['user_id' => $userId])->all();
-    }
-
-    /**
-     * Finds posts by title
-     *
-     * @param  string      $title
-     * @return ??
-     */
-    public static function findByTitle($title)
-    {
-        // posts which title contains $title
-        $result = Post::find()->query(["match" => ["title" => $title]])->all();
     }
 
     /**
@@ -186,6 +155,6 @@ class Post extends ActiveRecord implements Linkable
      */
     public function getUser()
     {
-        return $this->hasOne(User::className(), ['id' => 'user_id']);
+        return User::find()->where(['id' => $this->user_id])->one();
     }
 }
