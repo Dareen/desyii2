@@ -219,8 +219,6 @@ class User extends ActiveRecord implements IdentityInterface, UserCredentialsInt
     // UserCredentialsInterface methods
     public function checkUserCredentials($username, $password)
     {
-        var_dump($username);
-        exit();
         $user = static::findByUsername($username);
         if (empty($user)) {
             return false;

@@ -38,7 +38,7 @@ to retrieve a token.
 * Run using make
 ```sh
 $ cd yii2php-elasticsearch
-$ make docker
+$ make run
 ```
 
 TODO: stopping the containers, deleting the images... etc.
