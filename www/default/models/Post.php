@@ -104,11 +104,11 @@ class Post extends ActiveRecord implements Linkable
                     ActiveRecord::EVENT_BEFORE_INSERT => 'email',
                 ],
                 'value' => function ($event) {
-                    // return 'fake email';
+                    return 'fake email';
                     // TODO:
                     // var_dump($this->getUser());
                     // exit;
-                    return $this->getUser()->email;
+                    // return $this->getUser()->email;
                 },
             ],
             [

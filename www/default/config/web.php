@@ -57,7 +57,11 @@ $config = [
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'post',
-                    'extraPatterns' => ['GET search' => 'search'],
+                    // POST because search is more of an RPC than REST
+                    'extraPatterns' => ['POST search' => 'search'],
+                    // post ids are 32hex and not digits
+                    // this is to enable restful linkable responses
+                    'tokens' => ['{id}' => '<id:[a-f0-9]{32}>'],
 
                 ],
                 'POST oauth2/<action:\w+>' => 'oauth2/default/<action>',

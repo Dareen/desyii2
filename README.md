@@ -26,18 +26,18 @@ To setup the docker machine with all the needed requirements to run the applicat
 
 * Clone the repository
 ```sh
-$ git clone git@github.com:Dareen/yii2php-elasticsearch.git
+$ git clone git@github.com:Dareen/desyii2.git
 ```
 
 * Generate a GitHub OAuth token to go over the API rate limit
 Head to https://github.com/settings/tokens/new?scopes=repo&description=Composer+on+6d7eca279c5e+2015-06-19+1846
 to retrieve a token.
 
-* Copy the token to the Dockerfile [here](https://github.com/Dareen/yii2php-elasticsearch/blob/master/images/front/Dockerfile#L3)
+* Copy the token to the Dockerfile [here](https://github.com/Dareen/desyii2/blob/master/images/front/Dockerfile#L3)
 
 * Run using make
 ```sh
-$ cd yii2php-elasticsearch
+$ cd desyii2
 $ make run
 ```
 
@@ -66,11 +66,11 @@ Resources:
 Progress tracking:
 - [x] Use elasticsearch active record
 - [x] Users endpoints to list and create
-- [ ] authorize requests
+- [x] authorize requests
 - [ ] CRUD for Posts
 - [ ] Tests
 - [ ] Lookup php linters for sublime and check coding style standards
-- [ ] Documentation (this doc)
+- [-] Documentation (this doc)
 - [ ] API versioning
 - [ ] pagination?
 - [ ] role based access control
@@ -78,7 +78,7 @@ Progress tracking:
 - [ ] rename the repo to something more meaningful
 - [ ] find similar posts if the requested search yeilded no results
 - [ ] consider integrating with Kafka for a SOA enabled system
-- [ ] code comments
+- [x] code comments
 - [ ] format api responses: https://github.com/ikaras/yii2-oauth2-rest-template/blob/master/application/api/config/api.php#L31
-- [ ] include type mapping in docker scripts
+- [x] include type mapping in docker scripts
 - [ ] add postman importable requests collection

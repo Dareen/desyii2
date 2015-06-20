@@ -10,7 +10,7 @@ run:
 	docker-compose run front php /var/www/default/yii migrate --interactive=0
 	docker-compose run front php /var/www/default/yii migrate --migrationPath=@vendor/filsh/yii2-oauth2-server/migrations --interactive=0
 	# ES table mapping
-	docker-compoer run front bash -c " curl -XPOST ""http://admin:password@elasticsearch:9200/posts/post/_search"" -d'{""query"":{""filtered"":{""query"":{""match"":{""title"":""car""}},""filter"":[{""range"":{""created_at"":{""gte"":""2014-10-21T20:03:12.963""}}},{""range"":{""price"":{""gte"":10,""lte"":550}}}]}}}' "
+	docker-compose run front bash -c " curl -XPOST \"http://admin:password@elasticsearch:9200/posts\" -d'{\"mappings\":{\"post\":{\"_source\":{\"enabled\":true},\"properties\":{\"id\":{\"type\":\"string\"},\"user_id\":{\"type\":\"integer\"},\"created_at\":{\"type\":\"date\"},\"updated_at\":{\"type\":\"date\",\"index\":\"not_analyzed\"},\"updated_by\":{\"type\":\"date\",\"index\":\"not_analyzed\"},\"status\":{\"type\":\"integer\"},\"title\":{\"type\":\"string\"},\"price\":{\"type\":\"float\"},\"description\":{\"type\":\"string\",\"index\":\"not_analyzed\"},\"mobile\":{\"type\":\"string\"},\"email\":{\"type\":\"string\"},\"slug\":{\"type\":\"string\",\"index\":\"not_analyzed\"}}}}}' "
 
 stop:
 	docker-compose stop
