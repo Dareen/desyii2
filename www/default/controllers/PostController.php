@@ -25,7 +25,7 @@ class PostController extends OAuth2RestController
     {
         $behaviors = parent::behaviors();
         // index and view are allowed anonymously
-        $behaviors['authenticator']['except'] = ['index', 'view'];
+        $behaviors['authenticator']['except'] = ['index', 'view', 'search'];
         return $behaviors;
     }
 
