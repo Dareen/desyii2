@@ -5,6 +5,7 @@ $params = require(__DIR__ . '/params.php');
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
+    'modules' => require(__DIR__ . '/modules.php'),
     'bootstrap' => ['log'],
     'components' => [
         'request' => [
@@ -56,8 +57,10 @@ $config = [
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'post',
-                    'extraPatterns' => ['GET search' => 'search']
+                    'extraPatterns' => ['GET search' => 'search'],
+
                 ],
+                'POST oauth2/<action:\w+>' => 'oauth2/default/<action>',
             ],
         ]
     ],

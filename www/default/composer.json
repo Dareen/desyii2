@@ -26,6 +26,15 @@
         "yiisoft/yii2-gii": "*",
         "yiisoft/yii2-faker": "*"
     },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "http://github.com/Filsh/yii2-oauth2-server"
+        }
+    ],
+    "require-dev": {
+        "filsh/yii2-oauth2-server": "dev-master#bb9674225a4824715e26625c68ae1f3cf2421012"
+    },
     "config": {
         "process-timeout": 1800
     },
