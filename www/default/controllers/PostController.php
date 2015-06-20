@@ -4,6 +4,8 @@ namespace app\controllers;
 
 use yii\rest\ActiveController;
 use yii\data\ActiveDataProvider;
+use yii\web\NotFoundHttpException;
+use yii\web\BadRequestHttpException;
 
 class PostController extends ActiveController
 {
@@ -11,29 +13,39 @@ class PostController extends ActiveController
 
     public function actionSearch()
     {
-        if (!empty($_GET)) {
+        if (!empty($_GET))
+        {
             $model = new $this->modelClass;
-            foreach ($_GET as $key => $value) {
-                if (!$model->hasAttribute($key)) {
-                    throw new \yii\web\HttpException(404, 'Invalid attribute:' . $key);
+
+            // check that all the search GET params are valid attributes of the model
+            foreach ($_GET as $key => $value)
+            {
+                if (!$model->hasAttribute($key))
+                {
+                    throw new NotFoundHttpException('Invalid attribute:' . $key);
                 }
             }
-            try {
-                $provider = new ActiveDataProvider([
-                    'query' => $model->find()->where($_GET),
-                    'pagination' => false
-                ]);
-            } catch (Exception $ex) {
-                throw new \yii\web\HttpException(500, 'Internal server error');
-            }
 
-            if ($provider->getCount() <= 0) {
-                throw new \yii\web\HttpException(404, 'No entries found with this query string');
-            } else {
+            $provider = new ActiveDataProvider([
+                // TODO: elasicize this
+                'query' => $model->find()->where($_GET),
+                // TODO: pagination
+                'pagination' => false
+            ]);
+
+            if ($provider->getCount() <= 0)
+            {
+                throw new NotFoundHttpException('No posts are found with ' .
+                    'the provided parameters, please update and search again.');
+            }
+            else
+            {
                 return $provider;
             }
-        } else {
-            throw new \yii\web\HttpException(400, 'There are no query string');
+        }
+        else
+        {
+            throw new BadRequestHttpException('Please provide search terms.');
         }
     }
 }
