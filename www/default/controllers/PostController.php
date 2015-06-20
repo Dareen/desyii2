@@ -60,6 +60,8 @@ class PostController extends OAuth2RestController
         {
             $model = new $this->modelClass;
             $query = $model->find();
+            $query->index = 'posts';
+            $query->type = 'post';
             $mustTerms = array();
 
             // user
@@ -91,40 +93,16 @@ class PostController extends OAuth2RestController
             // price
             $priceRange = array();
             if (array_key_exists('price_lte', $_GET)) {
-                $priceRange[] = ["lte" => $_GET['price_lte']];
+                $priceRange["lte"] = $_GET['price_lte'];
             }
             if (array_key_exists('price_gte', $_GET)) {
-                $priceRange[] = ["gte" => $_GET['price_gte']];
+                $priceRange["gte"] = $_GET['price_gte'];
             }
             if (!empty($priceRange)) {
                 $query->filter(
                     [
                         "range" => [
                             "price" => $priceRange
-                        ]
-                    ]
-                );
-            }
-
-            // age rane of listing in minutes (for testing and demoing purposes)
-            $ageRange = array();
-            if (array_key_exists('age_lte', $_GET)) {
-                $upperStamp = time() - $_GET['age_lte']*60;
-                $upperDate = date(DATE_ATOM, $upperStamp);
-
-                $ageRange[] = ["lte" => $upperDate];
-            }
-            if (array_key_exists('age_gte', $_GET)) {
-                $lowerStamp = time() - $_GET['age_gte']*60;
-                $lowerDate = date(DATE_ATOM, $lowerStamp);
-
-                $ageRange[] = ["gte" => $lowerDate];
-            }
-            if (!empty($ageRange)) {
-                $query->filter(
-                    [
-                        "range" => [
-                            "created_at" => $ageRange
                         ]
                     ]
                 );
@@ -146,8 +124,7 @@ class PostController extends OAuth2RestController
         else
         {
             throw new BadRequestHttpException('Please provide at least one '.
-                'search terms: status, user_id, title, price_gte, price_lte, '.
-                'age_gte, age_lte');
+                'search terms: status, user_id, title, price_gte, price_lte');
         }
     }
 }

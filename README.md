@@ -100,8 +100,6 @@ admin:password<br/>
 `title`: keywords to search by<br/>
 `price_gte`: lower limit of a price range of the posted item<br/>
 `price_lte`: upper limit of the price range<br/>
-`age_gte`: age older limit, along with age_lte useful to search for posts listed in a gived period of time (by minutes, just for testing and demoing)<br/>
-`age_lte`: max age of posts
 
 
 ### Resources:
