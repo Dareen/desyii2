@@ -39,6 +39,10 @@ class Post extends ActiveRecord
     {
         return [
             [['title', 'price'], 'required'],
+            [['description'], 'string', 'min' => 5],
+            [['id'], 'integer'],
+            [['title'], 'string', 'max' => 250],
+            [['status'], 'integer', 'min' => 0, 'max' => 10],
         ];
     }
 
