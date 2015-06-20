@@ -23,9 +23,6 @@ $config = [
             'enableSession' => false,
             'loginUrl' => null,
         ],
-        'errorHandler' => [
-            'errorAction' => 'site/error',
-        ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             // send all mails to a file by default. You have to set
@@ -56,7 +53,11 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'user'],
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'post'],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'post',
+                    'extraPatterns' => ['GET search' => 'search']
+                ],
             ],
         ]
     ],

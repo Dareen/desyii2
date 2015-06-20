@@ -53,4 +53,10 @@ class Post extends ActiveRecord
     {
         $query->andWhere(['status' => 1]);
     }
+
+    public static function findByTitle($title)
+    {
+        // posts which title contains $title
+        $result = Post::find()->query(["match" => ["title" => $title]])->all();
+    }
 }

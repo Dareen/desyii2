@@ -1,17 +1,5 @@
 # Dockerized PHP Yii2 api using ElasticSearch, MySql, Oauth2, RBAC
 
-TODO:
-- [x] Use elasticsearch active record
-- [x] Users endpoints to list and create
-- [ ] authorize requests
-- [ ] CRUD for Posts
-- [ ] Tests
-- [ ] Lookup php linters for sublime and check coding style standards
-- [ ] Documentation (this doc)
-- [ ] API versioning
-- [ ] pagination?
-- [ ] role based access control
-
 # Work In Progress
 
 ## Docker containers
@@ -68,3 +56,19 @@ Resources:
 * [Installing Yii2](http://www.yiiframework.com/doc-2.0/guide-start-installation.html#recommended-apache-configuration)
 * [Yii2 Elasticsearch Active Record](http://www.yiiframework.com/doc-2.0/yii-elasticsearch-activerecord.html)
 
+StackOverflow
+* http://stackoverflow.com/questions/25522462/yii2-rest-query
+
+Progress tracking:
+- [x] Use elasticsearch active record
+- [x] Users endpoints to list and create
+- [ ] authorize requests
+- [ ] CRUD for Posts
+- [ ] Tests
+- [ ] Lookup php linters for sublime and check coding style standards
+- [ ] Documentation (this doc)
+- [ ] API versioning
+- [ ] pagination?
+- [ ] role based access control
+- [ ] cleanup the project structrure
+- [ ] rename the repo to something more meaningful
