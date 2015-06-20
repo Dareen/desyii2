@@ -1,4 +1,16 @@
-# Basic php yii2 api with docker
+# Dockerized PHP Yii2 api using ElasticSearch, MySql, Oauth2, RBAC
+
+TODO:
+- [x] Use elasticsearch active record
+- [x] Users endpoints to list and create
+- [ ] authorize requests
+- [ ] CRUD for Posts
+- [ ] Tests
+- [ ] Lookup php linters for sublime and check coding style standards
+- [ ] Documentation (this doc)
+- [ ] API versioning
+- [ ] pagination?
+- [ ] role based access control
 
 # Work In Progress
 
