@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-use \yii\elasticsearch\ActiveRecord;
+use yii\elasticsearch\ActiveRecord;
 use yii\base\NotSupportedException;
 use yii\web\Linkable;
 use yii\web\Link;

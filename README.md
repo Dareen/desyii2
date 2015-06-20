@@ -1,16 +1,16 @@
-# Dockerized PHP Yii2 api using ElasticSearch, MySql, Oauth2, RBAC
+# Dockerized PHP Yii2 api using ElasticSearch, MySql, OAuth2
 
 # Work In Progress
 
-## Docker containers
+## Docker containers include:
 
 * [Apache](https://github.com/tutumcloud/apache-php)
 * [MySQL](https://github.com/tutumcloud/mysql)
 * [Elasticsearch](https://github.com/tutumcloud/elasticsearch)
 * [Yii2](http://www.yiiframework.com/)
-Vendors are added to speed up building the docker container, but you can ignore them, and they'll be set up automatically in the docker build phase.
 
-TODO: consider deleting vendors later...
+I added vendors to the project to speed up building the docker containers, but ideally they should be excluded. You can skip and they'll be set up automatically in the docker build phase using Composer.
+
 
 ### Requirements
 
@@ -41,12 +41,59 @@ $ cd desyii2
 $ make run
 ```
 
-TODO: stopping the containers, deleting the images... etc.
+
+* Stopping the docker containers, deleting the images... etc.
+run:
+`make stop`
+this will stop docker-compose and the running containers.
+To delete an image, run `docker images | grep "front\|mysql\|elasticsearch"`
+Copy the image ids and run `docker rmi img_id` on them
 
 ### Usage
 
+* Now you can send requests to `localhost:8888`
+**Anonymous endpoints:**
+GET /posts
+GET /posts/id
+POST /search
 
-Resources:
+**User endpoints:**
+
+POST /posts
+PUT /posts
+DELETE /posts
+GET /users
+GET /id
+POST /users
+PUT /users
+DELETE /users
+
+* To authenticate a request, you must first get a token by sending a request to OAuth2 server:
+POST /outh2/token
+
+payload json:
+```json
+{
+    "grant_type":"password",
+    "username":"demo",
+    "password":"password",
+    "client_id":"testclient",
+    "client_secret":"testpass"
+}
+```
+
+* Users that are already available:
+demo:password
+test:password
+
+* OAuth2 Client Id and Secret:
+testclient:testpass
+
+* Databases credentials
+admin:password
+
+
+### Resources:
 
 * [Initial docker containers](https://github.com/kasperisager/phpstack)
 * [Yii2 Rest Guide](http://www.yiiframework.com/doc-2.0/guide-rest-quick-start.html)
@@ -61,24 +108,24 @@ Resources:
 * http://oauth.net/2/
 * https://github.com/bshaffer/oauth2-server-php
 * https://github.com/Filsh/yii2-oauth2-server
-* Issue: https://github.com/yiisoft/yii2/issues/4575 => used except
 
 Progress tracking:
 - [x] Use elasticsearch active record
 - [x] Users endpoints to list and create
 - [x] authorize requests
-- [ ] CRUD for Posts
+- [x] CRUD for Posts
 - [ ] Tests
 - [ ] Lookup php linters for sublime and check coding style standards
 - [-] Documentation (this doc)
 - [ ] API versioning
 - [ ] pagination?
 - [ ] role based access control
-- [ ] cleanup the project structrure
+- [ ] cleanup the project structrure and unneeded files
+- [ ] proper exception handling
 - [ ] rename the repo to something more meaningful
 - [ ] find similar posts if the requested search yeilded no results
-- [ ] consider integrating with Kafka for a SOA enabled system
 - [x] code comments
-- [ ] format api responses: https://github.com/ikaras/yii2-oauth2-rest-template/blob/master/application/api/config/api.php#L31
+- [ ] format api responses
 - [x] include type mapping in docker scripts
 - [ ] add postman importable requests collection
+- [ ] Separate the vendors in a different branch, if they might be needed to speed up building the docker image.
