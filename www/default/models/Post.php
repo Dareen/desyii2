@@ -18,12 +18,19 @@ class Post extends ActiveRecord
             // meta
             'id',
             'user_id',
+            'created_at',
+            'updated_at',
+            'updated_by',
+            'slug',
             'status',
             # post/listing details
             # basic
             'title',
             'price',
             'description',
+            # user contact info
+            'mobile',
+            'email',
         ];
     }
 
