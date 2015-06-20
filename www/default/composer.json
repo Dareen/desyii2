@@ -18,7 +18,8 @@
         "yiisoft/yii2": ">=2.0.4",
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
-        "yiisoft/yii2-elasticsearch": "~2.0.0"
+        "yiisoft/yii2-elasticsearch": "~2.0.0",
+        "filsh/yii2-oauth2-server": "dev-master#bb9674225a4824715e26625c68ae1f3cf2421012"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
