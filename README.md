@@ -10,6 +10,13 @@
 
 ## Getting started
 
+To setup the docker machine with all the needed requirements to run the application, please follow these steps:
+1. Please generate a GitHub OAuth token to go over the API rate limit
+Head to https://github.com/settings/tokens/new?scopes=repo&description=Composer+on+6d7eca279c5e+2015-06-19+1846
+to retrieve a token.
+
+2. Copy the token to the Dockerfile [here](https://github.com/Dareen/yii2php-elasticsearch/blob/master/images/front/Dockerfile#L3)
+
 ### Requirements
 
 * [Docker](https://docker.com/)
@@ -17,13 +24,11 @@
 
 ### Instructions
 
-You will need a github token to setup yii2 in the docker container, please generate a token
+
 
 Settings --> Applications --> Generate New Token
 
-please create a GitHub OAuth token to go over the API rate limit
-Head to https://github.com/settings/tokens/new?scopes=repo&description=Composer+on+6d7eca279c5e+2015-06-19+1846
-to retrieve a token.
+please
 
 ```sh
 # Clone the repository (using hub)
