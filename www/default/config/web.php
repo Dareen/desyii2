@@ -10,6 +10,9 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'pM-1iPfO_PXD48jWQ3c8TWkFUcgnkzIb',
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ]
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -19,9 +22,6 @@ $config = [
             'enableAutoLogin' => true,
             'enableSession' => false,
             'loginUrl' => null,
-        ],
-        'errorHandler' => [
-            'errorAction' => 'site/error',
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
@@ -40,12 +40,24 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
+        'elasticsearch' => [
+            'class' => 'yii\elasticsearch\Connection',
+            'nodes' => [
+                ['http_address' => 'admin:password@elasticsearch:9200'],
+                // configure more hosts if you have a cluster
+            ],
+        ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'enableStrictParsing' => true,
             'showScriptName' => false,
             'rules' => [
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'user'],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'post',
+                    'extraPatterns' => ['GET search' => 'search']
+                ],
             ],
         ]
     ],
