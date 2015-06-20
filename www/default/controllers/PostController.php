@@ -11,6 +11,7 @@ class PostController extends ActiveController
 {
     public $modelClass = 'app\models\Post';
 
+    // TODO: rewrite this, support page, sort, order, limit ... etc.
     public function actionSearch()
     {
         if (!empty($_GET))

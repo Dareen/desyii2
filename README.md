@@ -55,9 +55,8 @@ Resources:
 * [Basic Yii2 Rest API](http://budiirawan.com/setup-restful-api-yii2/)
 * [Installing Yii2](http://www.yiiframework.com/doc-2.0/guide-start-installation.html#recommended-apache-configuration)
 * [Yii2 Elasticsearch Active Record](http://www.yiiframework.com/doc-2.0/yii-elasticsearch-activerecord.html)
-
-StackOverflow
 * http://stackoverflow.com/questions/25522462/yii2-rest-query
+* http://www.yiiframework.com/wiki/748/building-a-rest-api-in-yii2-0/
 
 Progress tracking:
 - [x] Use elasticsearch active record
@@ -72,3 +71,5 @@ Progress tracking:
 - [ ] role based access control
 - [ ] cleanup the project structrure
 - [ ] rename the repo to something more meaningful
+- [ ] find similar posts if the requested search yeilded no results
+- [ ] consider integrating with Kafka for a SOA enabled system
