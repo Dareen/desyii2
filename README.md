@@ -58,7 +58,6 @@ GET /posts/\<id\><br/>
 GET /search<br/>
 
 * **User endpoints:**
-
 POST /posts<br/>
 PATCH /posts<br/>
 DELETE /posts<br/>
