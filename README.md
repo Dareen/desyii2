@@ -53,19 +53,19 @@ Copy the image id, and run `docker rmi \<image id\>`
 
 * Now you can send requests to `localhost:8888`
 * **Anonymous endpoints:**
-GET /posts
-GET /posts/\<id\>
-GET /search
+GET /posts<br/>
+GET /posts/\<id\><br/>
+GET /search<br/>
 
 * **User endpoints:**
 
 POST /posts<br/>
-PUT /posts<br/>
+PATCH /posts<br/>
 DELETE /posts<br/>
 GET /users<br/>
 GET users/\<id\><br/>
 POST /users<br/>
-PUT /users<br/>
+PATCH /users<br/>
 DELETE /users<br/>
 
 * To authenticate a request, you must first get a token by sending a request to OAuth2 server:<br/>
