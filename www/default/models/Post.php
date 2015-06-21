@@ -71,12 +71,13 @@ class Post extends ActiveRecord implements Linkable
     public function rules()
     {
         return [
+            [['id'], 'string'],
             [['title', 'price'], 'required'],
             ['description', 'string', 'min' => 5],
-            [['user_id', 'updated_by', 'id'], 'integer'],
+            [['user_id', 'updated_by'], 'integer'],
             [['price'], 'number'],
             [['title', 'slug'], 'string', 'max' => 250],
-            [['created_at', 'updated_at'], 'date'],
+            [['created_at', 'updated_at'], 'date', 'format' => 'php:'.DATE_ATOM],
             [['mobile'], 'safe'],
             [['email'], 'email'],
             [['status'], 'in', 'range' => [0, 1]],
