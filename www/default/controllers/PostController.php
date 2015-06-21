@@ -56,6 +56,7 @@ class PostController extends OAuth2RestController
     // TODO: rewrite this, support page, sort, order, limit ... etc.
     public function actionSearch()
     {
+        //TODO: do not use php $_GET and use Yii app's instead
         if (!empty($_GET))
         {
             $model = new $this->modelClass;

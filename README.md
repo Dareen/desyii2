@@ -81,17 +81,17 @@ payload json:
 }
 ```
 
-* Users that are already available:
+* Users that are already available:<br/>
 demo:password<br/>
 test:password<br/>
 
-* OAuth2 Client Id and Secret:
+* OAuth2 Client Id and Secret:<br/>
 testclient:testpass<br/>
 
-* Databases credentials
+* Databases credentials:<br/>
 admin:password<br/>
 
-* Search terms:
+* Search terms:<br/>
 `status`: int: 1 => active, 0 -> inactive<br/>
 `user_id`: the id of the lister/creator of the post<br/>
 `title`: keywords to search by<br/>
@@ -116,24 +116,17 @@ admin:password<br/>
 * https://github.com/bshaffer/oauth2-server-php
 * https://github.com/Filsh/yii2-oauth2-server
 
-## Work In Progress
+## Improvements
 
-Improvements:
-- [x] Use elasticsearch active record
-- [x] Users endpoints to list and create
-- [x] authorize requests
-- [x] CRUD for Posts
+Work In Progress:
 - [ ] Tests
-- [ ] Lookup php linters for sublime and check coding style standards
-- [x] Documentation (this doc)
+- [ ] Coding style
 - [ ] API versioning
 - [ ] RBAC: role based access control
-- [ ] cleanup the project structrure and unneeded files
-- [ ] proper exception handling
-- [ ] rename the repo to a more meaningful name
-- [ ] find similar posts if the requested search yeilded no results
-- [x] code comments
-- [ ] format api responses
-- [x] include type mapping in docker scripts
-- [ ] add postman importable requests collection
-- [ ] Separate the vendors in a different branch, if they might be needed to speed up building the docker image.
+- [ ] Cleanup the project structrure
+- [ ] Proper exception handling
+- [ ] Rename the repo to a more meaningful name
+- [ ] Find similar posts if the requested search yeilded no results
+- [ ] Format api responses
+- [ ] Add postman importable requests collection
+- [ ] Separate the vendors in a different branch
